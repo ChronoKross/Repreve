@@ -1,24 +1,24 @@
 const express = require("express");
 const router = express.Router();
-const employee = require("../models/Employee"); // Import your Mongoose model
+const Employee = require("../models/Employee"); // Import your Mongoose model
 
-// // Create a new employee
-// router.post("/employees", async (req, res) => {
-//   try {
-//     const { name, timestamp } = req.body;
-//     const employee = new Employee({ name, timestamp });
-//     const savedEmployee = await employee.save();
-//     res.json(savedEmployee);
-//   } catch (error) {
-//     console.error("Error creating employee:", error);
-//     res.status(500).json({ error: "Internal server error" });
-//   }
-// });
+// Create a new employee
+router.post("/", async (req, res) => {
+  try {
+    const { name, timestamp } = req.body;
+    const employee = new Employee({ name, timestamp });
+    const savedEmployee = await employee.save();
+    res.json(savedEmployee);
+  } catch (error) {
+    console.error("Error creating employee:", error);
+    res.status(500).json({ error: "Internal server error" });
+  }
+});
 
 // Get all employees
 router.get("/", async (req, res) => {
   try {
-    const employeeData = await employee.find(); // Use a different variable name
+    const employeeData = await Employee.find(); // Use a different variable name
     console.log(employeeData);
     res.json(employeeData);
   } catch (error) {
