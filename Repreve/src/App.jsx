@@ -1,31 +1,21 @@
 import "./App.css";
-import { useState } from "react";
+import axios from "axios";
+import { useEffect, useState } from "react";
 
 function App() {
-  const [stack, setStack] = useState([
-    "Nathan",
-    "Red",
-    "Jose",
-    "John",
-    "Johny",
-    "Ivan",
-    "Eric",
-    "Doug",
-  ]);
-
-  const handleClick = (clickedName) => {
-    //filter removes the clicked name from the stack
-    const updatedStack = stack.filter((name) => name !== clickedName);
-    //push adds the clicked name to the end of the stack
-    updatedStack.push(clickedName);
-    setStack(updatedStack);
-  };
-
+  const [employee, setEmployee] = useState([]);
+  useEffect(() => {
+    axios.get("http://localhost:3000/").then((res) => {
+      console.log(res, typeof res.data);
+      setEmployee(res.data);
+    });
+  }, []);
+  console.log(employee);
   return (
     <ol className=" grid text-center">
-      {stack.map((item, index) => (
-        <li key={index} className="container" onClick={() => handleClick(item)}>
-          {item}
+      {employee.map((employee, index) => (
+        <li key={index} className="container">
+          {employee.name}
         </li>
       ))}
     </ol>
