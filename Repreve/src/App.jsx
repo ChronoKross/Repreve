@@ -14,7 +14,9 @@ function App() {
   ]);
 
   const handleClick = (clickedName) => {
+    //filter removes the clicked name from the stack
     const updatedStack = stack.filter((name) => name !== clickedName);
+    //push adds the clicked name to the end of the stack
     updatedStack.push(clickedName);
     setStack(updatedStack);
   };
